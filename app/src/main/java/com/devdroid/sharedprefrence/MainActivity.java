@@ -1,0 +1,39 @@
+package com.devdroid.sharedprefrence;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Shader;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button button;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        button = findViewById(R.id.logIn);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Code for verification
+                SharedPreferences preferences = getSharedPreferences("login",MODE_PRIVATE);
+
+                // To insert a value in shared preference we need Editor
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("flag",true);
+                editor.apply();
+
+                startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+
+            }
+        });
+    }
+}
